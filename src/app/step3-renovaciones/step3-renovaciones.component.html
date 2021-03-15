@@ -134,7 +134,7 @@
                                             Si NO adjunta la orden patronal su depósito se tardará más de 24 horas</p>
                                             <input type="file" title="Cargar Orden Patronal" (change)="onFileChanged($event)"  lang="es" accept="image/png, .jpeg, .jpg, .pdf" style="margin-left: 25%;margin-top: 10px; height: 40px !important;"/>
                                     </div>
-
+                                <!--
                                     <div class="float-center" style="margin-top:20px;text-align:center; border:none;">
                                         <p class="BLUE" style="margin: 10px 0 10px 0;">Si adjunta una fotocopia de la cédula por ambos lados su depósito estará en 24 horas <br/>
                                             Si NO adjunta una fotocopia de la cédula su depósito se tardará más de 24 horas</p>
@@ -142,7 +142,7 @@
                                             <input type="file" title="Cargar cedula" (change)="onFileChangedCedula($event)"  lang="es" accept="image/png, .jpeg, .jpg, .pdf" style="margin-left: 25%;margin-top: 10px; height: 40px !important;"/>
                                     </div>
 
-                                  
+                                -->
                                     
                                     <br/>
                                     <br/>
@@ -229,7 +229,15 @@
                                                
                                             </table>
                                         </div>
+                                            
+                                            <div class="alert alert-danger" [hidden]='ErrorAlCrearLaSolicitud'><strong>Error!</strong>
+                                                Ocurrio un error al crear la solicitud.
+                                            </div>
+                                            <div class="alert alert-success" [hidden]='ProcesandoSolicitudSucces'><strong>Espera!</strong>
+                                                Estamos procesando tu solicitud, por favor espera.
+                                            </div>
 
+                                            
                                     </div>
                                     <div Style="margin-top:20px;margin-bottom:20px;">
                                         <a [routerLink]="['']" class="btn btn btn-danger" style="color: #f9f9f9;" >Cancelar</a>

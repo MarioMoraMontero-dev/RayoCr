@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Type} from '@angular/core';
+import { Component, OnInit, Input, Type, SystemJsNgModuleLoader} from '@angular/core';
 import { datosRenovacion } from '../interfaces/json-renovacion-datos';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RestService } from '../services/rest.service';
@@ -92,6 +92,8 @@ export class Step3RenovacionesComponent implements OnInit {
   cedula:any = [];
   cedula1!:String;
   bodyFilecedula!:String;
+  ErrorAlCrearLaSolicitud!: boolean;
+  ProcesandoSolicitudSucces!: boolean;
   ngOnInit(): void {
     console.log(this.data.plazo);
     this.monto = Number(this.data.monto);
@@ -107,6 +109,8 @@ export class Step3RenovacionesComponent implements OnInit {
     this.ocultarTD(this.plazo);
     this.calculafechas(this.plazo,this.total);
     this.procesoFinal.Id = this._Activatedroute.snapshot.paramMap.get("idSolicitud");
+    this.ErrorAlCrearLaSolicitud = true;
+    this.ProcesandoSolicitudSucces = true;
   }
 firstDate(tdate : Date){
     var day:number = tdate.getDate();
@@ -266,45 +270,21 @@ ocultarTD(diaSeleccionado:string){
  }
 
 aceptar(){
-    if((this.procesoFinal.ordenPatronal == null || this.procesoFinal.ordenPatronal == undefined) && (this.procesoFinal.requirioAyuda == null || this.procesoFinal.requirioAyuda == undefined)){
+  console.log(this.procesoFinal.requirioAyuda);
+    if(this.procesoFinal.ordenPatronal == null || this.procesoFinal.ordenPatronal == undefined){
+      this.open('focusFirst');
+    }else{
+      if(this.procesoFinal.requirioAyuda == null || this.procesoFinal.requirioAyuda == undefined ){
         this.open('focusFirst');
       }else{
-        if(this.procesoFinal.requirioAyuda == null || this.procesoFinal.requirioAyuda == undefined){
-            this.open('focusFirst');
-          }else{
-            if(this.procesoFinal.ordenPatronal == null || this.procesoFinal.ordenPatronal == undefined){
-                this.open('focusFirst');
-              }else{
-                if((this.procesoFinal.cedula == null || this.procesoFinal.cedula == undefined) && (this.procesoFinal.ordenPatronal == null || this.procesoFinal.ordenPatronal == undefined) && (this.procesoFinal.requirioAyuda == null || this.procesoFinal.requirioAyuda == undefined)){
-                    this.open('focusFirst');
-                  }else{
-                    if((this.procesoFinal.cedula == null || this.procesoFinal.cedula == undefined) && (this.procesoFinal.ordenPatronal == null || this.procesoFinal.ordenPatronal == undefined) ){
-                      this.open('focusFirst');
-                    }else{
-                      if((this.procesoFinal.cedula == null || this.procesoFinal.cedula == undefined) && (this.procesoFinal.requirioAyuda == null || this.procesoFinal.requirioAyuda == undefined)){
-                        this.open('focusFirst');
-                      }else{
-                        if(this.procesoFinal.cedula == null || this.procesoFinal.cedula == undefined){
-                          this.open('focusFirst');
-                        }else{
-                          if(this.tamanoDocOrden >= 3676333){
-                            this.open('focusFirst');
-                          }else{
-                            if(this.tamanoDocCedula >= 3676333){
-                              this.open('focusFirst');
-                            }else{
-                              this.getToken();
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-              }
-          }
+        if(this.tamanoDocOrden >= 3676333){
+          this.open('focusFirst');
+        }else{
+          this.getToken();
+      }  
       }
-      
-      
+     
+}
 }
 
 onFileChanged(event:any) {
@@ -358,6 +338,7 @@ getToken(){
 
 
 sendFinalSolicitud(datos:any []){
+  this.ProcesandoSolicitudSucces = false;
   for(let l of datos) {
     this.token = l.access_token;
     console.log("SalidaToken: "+this.token);
@@ -406,7 +387,7 @@ getBase64EncodedFileData(file: File): Observable<string> {
 
 open(name: string) {
     const modalSalida =  this.modalService.open(MODALS[name]);
-    if((this.procesoFinal.ordenPatronal == null || this.procesoFinal.ordenPatronal == undefined) && (this.procesoFinal.requirioAyuda == null || this.procesoFinal.requirioAyuda == undefined)){
+    if((this.procesoFinal.ordenPatronal == null || this.procesoFinal.ordenPatronal == undefined  ) && (this.procesoFinal.requirioAyuda == null ||  this.procesoFinal.requirioAyuda == undefined )){
         modalSalida.componentInstance.mensaje1 = 'Para poder completar el proceso debes adjuntar una';
         modalSalida.componentInstance.mensaje2 = 'orden patronal';
         modalSalida.componentInstance.mensaje3 = 'Y debes seleccionar si ';
@@ -424,49 +405,17 @@ open(name: string) {
                 modalSalida.componentInstance.mensaje3 = '';
                 modalSalida.componentInstance.mensaje4 = '';
               }else{
-                if((this.procesoFinal.cedula == null || this.procesoFinal.cedula == undefined) && (this.procesoFinal.ordenPatronal == null || this.procesoFinal.ordenPatronal == undefined) && (this.procesoFinal.requirioAyuda == null || this.procesoFinal.requirioAyuda == undefined)){
-                  modalSalida.componentInstance.mensaje1 = 'Para poder completar el proceso debes adjuntar una';
-                  modalSalida.componentInstance.mensaje2 = 'orden patronal y la fotocopia de la cédula por ambos lados';
-                  modalSalida.componentInstance.mensaje3 = 'Y debes seleccionar si ';
-                  modalSalida.componentInstance.mensaje4 = 'necesitaste ayuda durante el proceso o no';
-                }else{
-                  if((this.procesoFinal.cedula == null || this.procesoFinal.cedula == undefined) && (this.procesoFinal.ordenPatronal == null || this.procesoFinal.ordenPatronal == undefined) ){
-                    modalSalida.componentInstance.mensaje1 = 'Para poder completar el proceso debes adjuntar una';
-                    modalSalida.componentInstance.mensaje2 = 'orden patronal y la fotocopia de la cédula por ambos lados';
-                    modalSalida.componentInstance.mensaje3 = '';
-                    modalSalida.componentInstance.mensaje4 = '';
-                  }else{
-                    if((this.procesoFinal.cedula == null || this.procesoFinal.cedula == undefined) && (this.procesoFinal.requirioAyuda == null || this.procesoFinal.requirioAyuda == undefined)){
-                      modalSalida.componentInstance.mensaje1 = 'Para poder completar el proceso debes adjuntar una';
-                      modalSalida.componentInstance.mensaje2 = 'fotocopia de la cédula por ambos lados';
-                      modalSalida.componentInstance.mensaje3 = 'Y debes seleccionar si ';
-                      modalSalida.componentInstance.mensaje4 = 'necesitaste ayuda durante el proceso o no';
-                    }else{
-                      if(this.procesoFinal.cedula == null || this.procesoFinal.cedula == undefined){
-                        modalSalida.componentInstance.mensaje1 = 'Para poder completar el proceso debes adjuntar una';
-                        modalSalida.componentInstance.mensaje2 = 'fotocopia de la cédula por ambos lados';
-                        modalSalida.componentInstance.mensaje3 = '';
-                        modalSalida.componentInstance.mensaje4 = '';
-                      }else{
-                        if(this.tamanoDocOrden >= 3676333){
-                          modalSalida.componentInstance.mensaje1 = 'El documento de la orden patronal supera el tamaño establecido';
-                          modalSalida.componentInstance.mensaje2 = 'favor selecionar un archivo menor a 3MB';
-                          modalSalida.componentInstance.mensaje3 = 'Por favor selecciona un archivo ';
-                          modalSalida.componentInstance.mensaje4 = 'mas pequeño';
-                        }else{
-                          if(this.tamanoDocCedula >= 3676333){
-                            modalSalida.componentInstance.mensaje1 = 'El documento de la cédula supera el tamaño establecido';
-                            modalSalida.componentInstance.mensaje2 = 'favor selecionar un archivo menor a 3MB';
-                            modalSalida.componentInstance.mensaje3 = 'Por favor selecciona un archivo ';
-                            modalSalida.componentInstance.mensaje4 = 'mas pequeño';
-                          }
-                        }
-                      }
-                    }
+                  if(this.tamanoDocOrden >= 3676333){
+                    modalSalida.componentInstance.mensaje1 = 'El documento de la orden patronal supera el tamaño establecido';
+                    modalSalida.componentInstance.mensaje2 = 'favor selecionar un archivo menor a 3MB';
+                    modalSalida.componentInstance.mensaje3 = 'Por favor selecciona un archivo ';
+                    modalSalida.componentInstance.mensaje4 = 'mas pequeño';
                   }
                 }
               }
-          }
-      }
-    }
-}
+              }
+                      
+                  }
+                }
+              
+         
