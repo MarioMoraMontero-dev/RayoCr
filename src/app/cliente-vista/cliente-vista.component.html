@@ -135,11 +135,12 @@
                           <th>Código de préstamo</th>
                           <th>Monto principal</th>
                           <th>Tecnología</th>
-                          <th>Cupo administracion</th>
+                          <!--<th>Cupo administracion</th>-->
                           <th>Interes</th>
                           <th>Descuento</th>
                           <th>Total a Pagar</th>
                           <th>Detalles</th>
+                          <th colspan="2">Pagar</th>
                         </tr>
                       </thead>
   
@@ -159,9 +160,9 @@
                           <td style="text-align: center">
                             {{ x.tecnologia }}
                           </td>
-                          <td style="text-align: center">
+                          <!--<td style="text-align: center">
                             {{ x.aval }}
-                          </td>
+                          </td>-->
                           <td>
                             {{ x.interes }}
                           </td>
@@ -172,9 +173,13 @@
                             {{ x.totalPagar }}
                           </td>
                           <td>
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary" style="background-color:rgb(241, 179, 44) !important;">
                               Detalles
                             </button>
+                          </td>
+                          <td colspan="2">
+                            <a href="https://www.recaudoenlinea.co.cr/VirtualPay?p=sWz+6tl7RGsQgQU1a74ruDxhitFxQUtwsK+g5kD+a44="  class="btn btn-info" style="background-color:rgb(241, 179, 44) !important; border-color:rgb(241, 179, 44) !important;">Pagar<img src="https://res.cloudinary.com/dhp4vmxxf/image/upload/v1615842365/icono-rayo_atdprh.png" width="20px" height="20px" /></a>
+                                
                           </td>
                         </tr>
   

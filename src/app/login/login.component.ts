@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
   get emailUser(): any { return this.form.get('emailUser'); }
   get passuser(): any { return this.form.get('passuser'); }
   @Input() loginValues = {email:'',pass:'',idCliente:''};
-  @Input() recuperarEmail = {email:'passuser'};
+  @Input() recuperarEmail = {email:''};
 
   ngOnInit(): void {
     const contacto = localStorage.getItem("LoginContactId");

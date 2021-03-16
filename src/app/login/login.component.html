@@ -106,7 +106,7 @@
         <div class="modal-body">
             <div class="form-group" [hidden]="mensajeSalidaRecupe != undefined">
                 <label for="exampleInputEmail1">Ingrese su correo electrónico</label>
-                <input type="email" [(ngModel)]="recuperarEmail.email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo ">
+                <input type="email" [(ngModel)]="recuperarEmail.email" class="form-control" id="exampleInputEmail1"  placeholder="Correo ">
                 <small id="emailHelp" class="form-text text-muted">Al dar click en el botón de aceptar 
                     se enviara un correo electrónico a la dirección especificada anteriormente.</small>
                 <button type="button" class="btn btn-success" (click)="getTokenRecuperarContra()" >Aceptar</button>
@@ -116,6 +116,6 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="refrescarPantalla()" >Aceptar</button>
+          <button type="button" class="btn btn-outline-dark" (click)="refrescarPantalla()" >Salir</button>
         </div>
       </ng-template>
