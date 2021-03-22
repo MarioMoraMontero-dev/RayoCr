@@ -16,7 +16,7 @@ import {UsernameValidator} from '../services/validaciones.service';
 export class StepDireccionComponent implements OnInit {
   @Input() direcCliente = new JsonDireccioCliente();
   form!:FormGroup;
-  paisValores:string[]=["Costa Rica"];
+  paisValores:string[]=["--Seleccione un valor --","Costa Rica"];
   provinciaValores:string[] =[];
   cantonValores:string[] =[];
   distritoValores:string[]=[];
@@ -26,6 +26,7 @@ export class StepDireccionComponent implements OnInit {
   public distrito:string|undefined;
   public ErrorAlCrearLaSolicitud!:boolean;
   public ProcesandoSolicitudSucces!:boolean;
+  public PaisSinSeleccionar:boolean|undefined;
   login: any = [];
   token : any;
   jsonEntrante:any = [];
@@ -39,6 +40,8 @@ export class StepDireccionComponent implements OnInit {
     this.buildForm();
     this.ErrorAlCrearLaSolicitud = true;
     this.ProcesandoSolicitudSucces = true;
+    this.pais == "--Seleccione un valor --";
+    this.PaisSinSeleccionar = true;
   }
 
   provincias(){
@@ -1091,6 +1094,7 @@ export class StepDireccionComponent implements OnInit {
       distrito: ['',[Validators.required]],
       direccionExacta: ['',[Validators.required,Validators.maxLength(245),UsernameValidator.cannotContainSpace]],
     });
+    this.form.controls['pais'].setValue('--Seleccione un valor --', {onlySelf: true});
   
       //#region pais
       this.form.get('pais')?.valueChanges
@@ -1100,6 +1104,7 @@ export class StepDireccionComponent implements OnInit {
           this.pais = value;
           this.provincias();
           this.direcCliente.pais = value;
+          this.PaisSinSeleccionar = true;
       });
       //#endregion pais
   
@@ -1153,8 +1158,12 @@ export class StepDireccionComponent implements OnInit {
   actualizarDireccion(event:Event){
     event.preventDefault();
     if(this.form.valid){
+      this.PaisSinSeleccionar = true;
       const values = this.form.value;
     }else{
+      if(this.pais == "--Seleccione un valor --"){
+        this.PaisSinSeleccionar = false;
+      }
       this.form.markAllAsTouched();
       console.log('Error al enviar datos');
     }
@@ -1196,6 +1205,7 @@ export class StepDireccionComponent implements OnInit {
   }
   
   getToken(){
+    if(this.pais != '--Seleccione un valor --'){
       this.login=[];
       this.rest.getToken().subscribe((data: {})=>{
       console.log(data);
@@ -1204,12 +1214,13 @@ export class StepDireccionComponent implements OnInit {
       this.renovar(this.login);
       this.ErrorAlCrearLaSolicitud = true;
       this.ProcesandoSolicitudSucces = false;
-    
-    })
+    });
     
   
+  }else{
+    this.PaisSinSeleccionar = false;
   }
-  
+}
 
   cleanUnnecessaryWhiteSpaces(cadena: string){
     return cadena.replace(/\s{2,}/g, ' ').trim();

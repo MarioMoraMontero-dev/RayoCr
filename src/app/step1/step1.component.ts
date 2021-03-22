@@ -62,8 +62,7 @@ export class Step1Component implements OnInit {
 		
 		this.tecnologia = this.getTecnologia(this.valorSolicitar,this.diaSeleccionado);
     this.subtotal = this.valorSolicitar+this.interes+this.tecnologia;
-    this.aval =0;//this.getAval(this.subtotal);
-		//this.iva = this.getIVA(this.tecnologia);
+    this.aval = 0;//this.getAval(this.subtotal);
     this.totalPagar = this.subtotal+this.aval;
     this.calculafechas(this.diaSeleccionado,this.totalPagar);
     this.ocultarFechas(this.diaSeleccionado);
