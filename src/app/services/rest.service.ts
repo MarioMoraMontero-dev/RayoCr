@@ -5,8 +5,8 @@ import { Observable, throwError,of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Token } from '../interfaces/token';
 import { JsonLoginDatos } from '../interfaces/json-login-datos';
-const endpoint = 'https://rayocr.my.salesforce.com/services/';
-//const endpoint = 'https://rayocr--partialqa.my.salesforce.com/services/';
+//const endpoint = 'https://rayocr.my.salesforce.com/services/';
+const endpoint = 'https://rayocr--partialqa.my.salesforce.com/services/';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,17 +15,17 @@ export class RestService {
   constructor(private http: HttpClient) { }
   public data!:JsonLoginDatos[];
   body = new HttpParams()
-  .set('username', 'admin@instantloanscr.com')
+  /*.set('username', 'admin@instantloanscr.com')
   .set('password', '1995CarocnaDH59YpCJR3lcvRpkwJfyJ')
   .set('grant_type', 'password')
   .set('client_id', '3MVG9xOCXq4ID1uFE9DjJL8SWOYDt26ODxlaVr3qYsPEiHKoYvlL3_5DF_6hQvBbSfT5rs3LbHg_gTQU0fkbg')
-  .set('client_secret', '1576732546EDADC27994DA302B0B78A0E6A0CEEDC60FEA5079A2D750C4CB0ACD');
+  .set('client_secret', '1576732546EDADC27994DA302B0B78A0E6A0CEEDC60FEA5079A2D750C4CB0ACD');*/
 
-  /*.set('username', 'admin@instantloanscr.com.partialqa')
+  .set('username', 'admin@instantloanscr.com.partialqa')
   .set('password', '1995CaroLKbi00mxSMXVtsrZ9r0qMJnP2')
   .set('grant_type', 'password')
   .set('client_id', '3MVG9zZht._ZaMul1Lx9yQsWBSlG2FGD27L7cF3zzKWcZoQyFYiqbrjhdku.rliUv3.7hGAsz5YeNMjdCP5FT')
-  .set('client_secret', 'D287925822BCEFC7B7F4F1D076C74BC2FC6EA7B7EFEA8580CEB865F0BD146990');*/
+  .set('client_secret', 'D287925822BCEFC7B7F4F1D076C74BC2FC6EA7B7EFEA8580CEB865F0BD146990');
 
 
   getToken(): Observable<any>{

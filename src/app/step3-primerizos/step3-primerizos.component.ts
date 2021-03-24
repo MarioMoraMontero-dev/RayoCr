@@ -17,6 +17,7 @@ export class Step3PrimerizosComponent implements OnInit {
   public descuento:number|undefined;
   public total:number|undefined;
   public aval:number|undefined;
+  public iva:number|undefined;
    public cc1 : HTMLElement | undefined;
   public cc2 : HTMLElement | undefined;
   public cc3 : HTMLElement | undefined;
@@ -45,6 +46,7 @@ data: JsonSolicitudNew = history.state.data;
     this.descuento =Number(this.data.descuento);
     this.total = Number(this.data.totalPagar);
     this.aval = Number(this.data.aval);
+    this.iva = Number(this.data.iva);
     this.plazo = this.data.plazo;
     this.cc1 = document.getElementById('fecha1')!;
     this.cc2 = document.getElementById('fecha2')!;

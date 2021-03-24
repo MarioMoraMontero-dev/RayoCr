@@ -1306,7 +1306,7 @@ sendSolicitudPortal(datos:any){
       for(let j of this.jsonEntrante) {
         if(j.Mensaje == 'Solicitud creada correctamente'){
           
-          this.router.navigate(['step3Primerizos',j.Id],{state: {data:{id:j.Id,monto:j.monto ,interes:j.interes ,tecno:j.tecno,descuento:j.descuento,totalPagar:j.totalPagar, aval:j.aval, plazo:plazox}}});
+          this.router.navigate(['step3Primerizos',j.Id],{state: {data:{id:j.Id,monto:j.monto ,interes:j.interes ,tecno:j.tecno,descuento:j.descuento,totalPagar:j.totalPagar, aval:j.aval,iva:j.iva, plazo:plazox}}});
         }else{
           if(j.Mensaje == 'Cliente Existe'){
             

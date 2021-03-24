@@ -1,48 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-step1',
-  templateUrl: './step1.component.html',
-  styleUrls: ['./step1.component.css']
+  selector: 'app-rayo-plus-solicitud',
+  templateUrl: './rayo-plus-solicitud.component.html',
+  styleUrls: ['./rayo-plus-solicitud.component.css']
 })
-export class Step1Component implements OnInit {
-//
-  constructor(private router: Router) { }
-	public valorSolicitar!: number;
-	public diaSeleccionado!: number;
-  public numCuota!: string| undefined;
-	public interes: number | undefined;
-	public subtotal: number | undefined;
-	public tecnologia: number | undefined;
-	public aval: number | undefined;
-  public iva: number | undefined;
-  public totalPagar: number | undefined;
-  public fecha1: string | undefined;
-  public fecha2: string | undefined;
-  public fecha3: string | undefined;
-  public Abono1: number | undefined;
-  public Abono2: number | undefined;
-  public Abono3: number | undefined;
-  public cc1 : HTMLElement | undefined;
-  public cc2 : HTMLElement | undefined;
-  public cc3 : HTMLElement | undefined;
-  public Abono2Texto: String | undefined;
-  public Abono1Texto: String | undefined;
+export class RayoPlusSolicitudComponent implements OnInit {
 
-
+  constructor() { }
+ public valorSeleccionado!:String;
+ public valorSolicitar!: number;
+ public diaSeleccionado!: number;
+ public numCuota!: string| undefined;
+ public interes: number | undefined;
+ public subtotal: number | undefined;
+ public tecnologia: number | undefined;
+ public aval: number | undefined;
+ public iva: number | undefined;
+ public totalPagar: number | undefined;
+ public fecha1: string | undefined;
+ public fecha2: string | undefined;
+ public fecha3: string | undefined;
+ public Abono1: number | undefined;
+ public Abono2: number | undefined;
+ public Abono3: number | undefined;
+ public cc1 : HTMLElement | undefined;
+ public cc2 : HTMLElement | undefined;
+ public cc3 : HTMLElement | undefined;
+ public Abono2Texto: String | undefined;
+ public Abono1Texto: String | undefined;
   ngOnInit(): void {
-    this.cc1 = document.getElementById('1Row')!;
-    this.cc2 = document.getElementById('2Row')!;
-    this.cc3 = document.getElementById('3Row')!;
-    this.valorSolicitar  = 40000;
-    this.diaSeleccionado = 30;
     this.numCuota = '2 cuotas';
-    this.calculafechas(30,64730.00);
-    this.calcularMontos();
-    this.ocultarFechas(30);
-    
   }
+
+  obtenervalor(valor:string){
+  this.valorSeleccionado = valor;
+  }
+
   calcularMontos()
 	{
     
@@ -69,10 +63,8 @@ export class Step1Component implements OnInit {
     this.calculafechas(this.diaSeleccionado,this.totalPagar);
     this.ocultarFechas(this.diaSeleccionado);
   }
-  
 
-
- getTecnologia(montoSolicitado:number,plazo:any)
+  getTecnologia(montoSolicitado:number,plazo:any)
             {
               var tecno = 0;
                 if(plazo == 15)
@@ -274,173 +266,170 @@ export class Step1Component implements OnInit {
                 return interes;
   }
 
- calculafechas(diaSeleccionado: number,total:number){
-  let today: Date = new Date();
-   if(diaSeleccionado == 15){
-     this.numCuota = '1 cuota';
-     this.fecha1 = this.firstDate(today);
-     this.fecha2 = '';
-     this.fecha3 = '';
-     this.Abono1 = total;
-     this.Abono1Texto = 'Abono Unico';
-   }else{
-    if(this.diaSeleccionado == 30){
-      this.numCuota = '2 cuotas';
-      this.fecha1 = this.firstDate(today);
-      this.fecha2 = this.secondDate(today);
-      this.fecha3 = '';
-      this.Abono1 = total/2;
-      this.Abono2 = total/2;
-      this.Abono2Texto = 'Abono'
-      this.Abono1Texto = 'Primer Abono';
-   }else{
-    if(this.diaSeleccionado == 45){
-      this.numCuota = '3 cuotas';
-      this.fecha1 = this.firstDate(today);
-      this.fecha2 = this.secondDate(today);
-      this.fecha3 = this.thirdDate(today);
-      this.Abono1 = total/3;
-      this.Abono2 = total/3;
-      this.Abono3 = total/3;
-      this.Abono1Texto = 'Primer Abono';
+  calculafechas(diaSeleccionado: number,total:number){
+    let today: Date = new Date();
+     if(diaSeleccionado == 15){
+       this.numCuota = '1 cuota';
+       this.fecha1 = this.firstDate(today);
+       this.fecha2 = '';
+       this.fecha3 = '';
+       this.Abono1 = total;
+       this.Abono1Texto = 'Abono Unico';
+     }else{
+      if(this.diaSeleccionado == 30){
+        this.numCuota = '2 cuotas';
+        this.fecha1 = this.firstDate(today);
+        this.fecha2 = this.secondDate(today);
+        this.fecha3 = '';
+        this.Abono1 = total/2;
+        this.Abono2 = total/2;
+        this.Abono2Texto = 'Abono'
+        this.Abono1Texto = 'Primer Abono';
+     }else{
+      if(this.diaSeleccionado == 45){
+        this.numCuota = '3 cuotas';
+        this.fecha1 = this.firstDate(today);
+        this.fecha2 = this.secondDate(today);
+        this.fecha3 = this.thirdDate(today);
+        this.Abono1 = total/3;
+        this.Abono2 = total/3;
+        this.Abono3 = total/3;
+        this.Abono1Texto = 'Primer Abono';
+     }
+     }
    }
    }
- }
- }
- firstDate(tdate : Date){
-                var day:number = tdate.getDate();
-                var month:number = tdate.getMonth() + 1;
-                var year:number = tdate.getFullYear();
-                var newDate;
-                if(day >= 1 && day <= 6){
-                    newDate = "15" + "/" +month+ "/" +year;
-                }else if(day >= 7 && day <= 21){
-                    if(month == 2){
-                        newDate = "28" + "/" + 2 + "/" +year;
-                    }else{
-                        newDate = "30" + "/" + month + "/" +year;
+   firstDate(tdate : Date){
+                  var day:number = tdate.getDate();
+                  var month:number = tdate.getMonth() + 1;
+                  var year:number = tdate.getFullYear();
+                  var newDate;
+                  if(day >= 1 && day <= 6){
+                      newDate = "15" + "/" +month+ "/" +year;
+                  }else if(day >= 7 && day <= 21){
+                      if(month == 2){
+                          newDate = "28" + "/" + 2 + "/" +year;
+                      }else{
+                          newDate = "30" + "/" + month + "/" +year;
+                      }
+                  }else if(day >= 22 && day <= 31){
+                      month = month + 1;
+                      if(month == 13){
+                          month = 1;
+                          year = year + 1;
+                          newDate = "15" + "/" + month + "/" +year;
+                      }else{
+                          newDate = "15" + "/" +month + "/" +year;
+                      }
+                  }
+                  return newDate;
+              }
+  
+   secondDate(tdate:Date){
+                  var day = tdate.getDate();
+                  var month = tdate.getMonth() + 1;
+                  var year = tdate.getFullYear();
+                  var newDate2;
+  
+                  if(day >= 1 && day <= 6){
+                      newDate2 = "30" + "/" +month+ "/" + year ;
+                  }
+                  else if(day >= 7 && day <= 21){
+                      if(month == 2){
+                          newDate2 = 15 + "/"+3+"/"+year;
+                      }else{
+                          month = month +1;
+                          if(month == 13){
+                              month = 1;
+                              year = year + 1;
+                              newDate2 = 15+"/"+month+"/"+year;
+                          }else{
+                              newDate2 = 15+"/"+month+"/"+year;
+                          }
+                      }
+                  }else if(day >= 22 && day <= 31){
+                      month = month + 1;
+                      if(month == 13){
+                          month = 1;
+                          year = year + 1;
+                          newDate2 = 30+"/"+month+"/"+year;
+                      }else{
+                          newDate2 = 30+"/"+month+"/"+year;
+                      }
+                  }
+                  return newDate2;
+              }
+   thirdDate(tdate:Date){
+                  var day = tdate.getDate();
+                  var month = tdate.getMonth() + 1;
+                  var year = tdate.getFullYear();
+                  var newDate3;
+                  if(day >= 1 && day <= 6){
+                      month = month + 1;
+                      if(month == 13){
+                          month = 1;
+                          year = year + 1;
+                          newDate3 = "15"+"/"+month+"/"+year;
+                      }else{
+                          newDate3 = "15"+"/"+month+"/"+year;
+                      }
+                  }else if(day >= 7 && day <= 21){
+                      if(month == 2){
+                          newDate3 = 30+"/"+3+"/"+year;
+                      }else{
+                          month = month + 1;
+                          if(month == 13){
+                              month = 1;
+                              year = year + 1;
+                              newDate3 = 30+"/"+month+"/"+year;
+                          }else if(month == 1){
+                              newDate3 = 28+"/"+2+"/"+year;
+                          }else{
+                              newDate3 = 30+"/"+month+"/"+year;
+                          }
+                          newDate3 = 30+"/"+month+"/"+year;
+                      }
+                  }else if(day >= 22 && day <= 31){
+                      month = month + 2;
+                      if(month == 13){
+                          month = 1;
+                          year = year + 1;
+                          newDate3 = 15+"/"+month+"/"+year;
+                      }else{
+                          newDate3 = 15+"/"+month+"/"+year;
+                      }
+                  }
+                  return newDate3;
+              }
+  
+
+              ocultarFechas(diaSeleccionado:number){
+                if(diaSeleccionado == 15){
+                  if(this.cc2 != undefined && this.cc3 != undefined){
+                   this.cc2.setAttribute("style", "display:none!important;");
+                   this.cc3.setAttribute("style", "display:none!important;");
+                  }
+                  
+              
+                }else{
+                 if(this.diaSeleccionado == 30){
+                   this.Abono2Texto = 'Abono final'
+                   if(this.cc2 != undefined && this.cc3 != undefined){
+                     this.cc2.setAttribute("style", "display;font-size:14px;");
+                     this.cc3.setAttribute("style", "display:none!important;");
                     }
-                }else if(day >= 22 && day <= 31){
-                    month = month + 1;
-                    if(month == 13){
-                        month = 1;
-                        year = year + 1;
-                        newDate = "15" + "/" + month + "/" +year;
-                    }else{
-                        newDate = "15" + "/" +month + "/" +year;
+                   
+                }else{
+                 if(this.diaSeleccionado == 45){
+              
+                   this.Abono2Texto = "Segundo Abono";
+                   if(this.cc2 != undefined && this.cc3 != undefined){
+                     this.cc2.setAttribute("style", "display;font-size:14px;");
+                     this.cc3.setAttribute("style", "display;font-size:14px;");
                     }
+                 
                 }
-                return newDate;
-            }
-
- secondDate(tdate:Date){
-                var day = tdate.getDate();
-                var month = tdate.getMonth() + 1;
-                var year = tdate.getFullYear();
-                var newDate2;
-
-                if(day >= 1 && day <= 6){
-                    newDate2 = "30" + "/" +month+ "/" + year ;
                 }
-                else if(day >= 7 && day <= 21){
-                    if(month == 2){
-                        newDate2 = 15 + "/"+3+"/"+year;
-                    }else{
-                        month = month +1;
-                        if(month == 13){
-                            month = 1;
-                            year = year + 1;
-                            newDate2 = 15+"/"+month+"/"+year;
-                        }else{
-                            newDate2 = 15+"/"+month+"/"+year;
-                        }
-                    }
-                }else if(day >= 22 && day <= 31){
-                    month = month + 1;
-                    if(month == 13){
-                        month = 1;
-                        year = year + 1;
-                        newDate2 = 30+"/"+month+"/"+year;
-                    }else{
-                        newDate2 = 30+"/"+month+"/"+year;
-                    }
-                }
-                return newDate2;
-            }
- thirdDate(tdate:Date){
-                var day = tdate.getDate();
-                var month = tdate.getMonth() + 1;
-                var year = tdate.getFullYear();
-                var newDate3;
-                if(day >= 1 && day <= 6){
-                    month = month + 1;
-                    if(month == 13){
-                        month = 1;
-                        year = year + 1;
-                        newDate3 = "15"+"/"+month+"/"+year;
-                    }else{
-                        newDate3 = "15"+"/"+month+"/"+year;
-                    }
-                }else if(day >= 7 && day <= 21){
-                    if(month == 2){
-                        newDate3 = 30+"/"+3+"/"+year;
-                    }else{
-                        month = month + 1;
-                        if(month == 13){
-                            month = 1;
-                            year = year + 1;
-                            newDate3 = 30+"/"+month+"/"+year;
-                        }else if(month == 1){
-                            newDate3 = 28+"/"+2+"/"+year;
-                        }else{
-                            newDate3 = 30+"/"+month+"/"+year;
-                        }
-                        newDate3 = 30+"/"+month+"/"+year;
-                    }
-                }else if(day >= 22 && day <= 31){
-                    month = month + 2;
-                    if(month == 13){
-                        month = 1;
-                        year = year + 1;
-                        newDate3 = 15+"/"+month+"/"+year;
-                    }else{
-                        newDate3 = 15+"/"+month+"/"+year;
-                    }
-                }
-                return newDate3;
-            }
-
-ocultarFechas(diaSeleccionado:number){
-  if(diaSeleccionado == 15){
-    if(this.cc2 != undefined && this.cc3 != undefined){
-     this.cc2.setAttribute("style", "display:none!important;");
-     this.cc3.setAttribute("style", "display:none!important;");
-    }
-    
-
-  }else{
-   if(this.diaSeleccionado == 30){
-     this.Abono2Texto = 'Abono final'
-     if(this.cc2 != undefined && this.cc3 != undefined){
-       this.cc2.setAttribute("style", "display;font-size:14px;");
-       this.cc3.setAttribute("style", "display:none!important;");
-      }
-     
-  }else{
-   if(this.diaSeleccionado == 45){
-
-     this.Abono2Texto = "Segundo Abono";
-     if(this.cc2 != undefined && this.cc3 != undefined){
-       this.cc2.setAttribute("style", "display;font-size:14px;");
-       this.cc3.setAttribute("style", "display;font-size:14px;");
-      }
-   
-  }
-  }
-}
-}
-
-goStep2(){
-    this.router.navigate(['step2/',this.diaSeleccionado,this.valorSolicitar]);
-}
+              }
+              }
 }
