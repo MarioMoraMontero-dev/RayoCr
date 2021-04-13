@@ -10,4 +10,6 @@ export interface JsonSolicitudNew {
     aval:string;
     Mensaje:string;
     plazo:string;
+    servicioFE:string;
 }
+//

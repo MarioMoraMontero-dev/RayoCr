@@ -10,7 +10,7 @@
                     
                     <div class="">
                         <div Class="col-md-12">
-                        <img Style="width:100%;" Src="https://res.cloudinary.com/dlxejuzfi/image/upload/v1574267006/RAYOCol_Silder_1_kobd6x.png"/>
+                        <img Style="width:100%;" Src="https://www.rayo.cr/agregar/imgs/RAYOCol_Silder%201.png"/>
                     </div>
                     <br/>
                     <div class="col-md-7" Style="margin: 0 auto; background: #fff; position: relative; bottom: 152px;text-align:center;">
@@ -35,23 +35,35 @@
                                          
                                         <div Class="caja">
                                             <p Style="padding-top:10px;">Interés:  {{interes|currency:'₡'}}</p>
+
+                                            
+                                            <p style="float:left;">Cupo Administrativo:  {{aval|currency:'₡'}}</p>
+                                            <p><a href="#" data-tooltip="Cupo administrativo: Es opcional, siempre y cuando nos hagas llegar un certificado de una póliza, fianza o aval que represente garantías para el pago, tomada de manera individual con otra entidad legalmente constituida cuyo beneficiario deberá aparecer a nombre de RAYOCR S.A, la cual debe ser aprobada previamente por nosotros."><i style="margin-top: 6px;
+                                                margin-left: 10px;"  class="fas fa-info-circle"></i></a></p>
+                                           
                                          
-                                            <p style="float:left;">Tecnología:  {{tecnologia|currency:'₡'}}</p>
+                                            <p style="float:left;">Monto Bruto Tecnología :  {{tecnologia|currency:'₡'}}</p>
                                             <p><a href="#" data-tooltip="Este cargo te abre las puertas de toda nuestra plataforma y sus beneficios. Es opcional, pero aceptarlo es obtener los servicios adicionales a los canales tradicionales para el manejo de tu cupo de crédito. Cambias las filas, los turnos y los papeleos, por un servicio simple, rápido y 100% digital. Además podrás acumular puntos, obtener descuentos y descargar cupones de nuestras marcas aliadas.  "><i style="margin-top: 6px;
                                                 margin-left: 10px;"  class="fas fa-info-circle"></i></a></p>
                                            
-    
-                                           <!--<p style="float:left;">Cupo administracion:  {{aval|currency:'₡'}}</p>
-                                            <p><a href="#" data-tooltip="Cupo administrativo: Es opcional, siempre y cuando nos hagas llegar un certificado de una póliza, fianza o aval que represente garantías para el pago, tomada de manera individual con otra entidad legalmente constituida cuyo beneficiario deberá aparecer a nombre de RAYOCR S.A, la cual debe ser aprobada previamente por nosotros."><i style="margin-top: 6px;
-                                                margin-left: 10px;"  class="fas fa-info-circle"></i></a></p>-->
+                                                
+                                                <p style="float:left;">Monto Neto Tecnología :  {{tecnologia|currency:'₡'}}</p>
+                                            <p><a href="#" data-tooltip=""><i style="margin-top: 6px;
+                                                margin-left: 10px;"  ></i></a></p>
                                            
+                                           <p style="float:left;">I.V.A:  {{iva|currency:'₡'}}</p>
+                                           <p><a href="#" data-tooltip="(Monto Neto Tecnología + Cupo Administrativo) * 13% "><i style="margin-top: 6px;
+                                            margin-left: 10px;" class="fas fa-info-circle" ></i></a></p>
+
+                                            
                                             <div style="clear:both;"></div>
                                         </div>
                                         
-    
+    <!--
                                         <div Class="caja2">
                                             <p Style="padding-top:10px;">Sub total: {{subtotal|currency:'₡'}}</p>
                                         </div>
+                                        -->
                                         <div Class="caja3">
                                             <p>TOTAL A PAGAR: {{totalPagar|currency:'₡'}}</p>
                                         </div>
@@ -113,11 +125,22 @@
                                     </div>
                                 </div>
                             </div>
+                            <br/>
+                            <br/>
+                            <div style="background-color: #025FA3; height: 45%; color: white; text-align: center;">
+                                <br>
+                                <br>
+                                <label style="font-size: 20px; font-weight: bold;">Si quieres pagar tu saldo, paga aquí</label>
+                                <br>
+                                <a href="https://www.recaudoenlinea.co.cr/VirtualPay?p=sWz+6tl7RGsQgQU1a74ruDxhitFxQUtwsK+g5kD+a44="  class="btn btn-info" style="background-color:rgb(241, 179, 44) !important; border-color:rgb(241, 179, 44) !important;">Pagar<img src="https://res.cloudinary.com/dhp4vmxxf/image/upload/v1615842365/icono-rayo_atdprh.png" width="30px" height="30px" /></a>
+                                <br/>
+                                <br/>
+                            </div>
                         </div>
+                      
                         </div>
-                    </div>
-                    <br />
-                    <br/>
+
+                   
                     <!--FOOTER PAGOS-->
                     <br/><br/><br/><br/>
                 </div>
@@ -140,7 +163,7 @@
           <div class="row">
             <!-- Gallery item -->
             <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-              <div class="bg-white rounded shadow-sm"><img src="https://res.cloudinary.com/dlxejuzfi/image/upload/v1574268342/amigos-01_zwlb9w.png" alt="" class="img-fluid card-img-top">
+              <div class="bg-white rounded shadow-sm"><img src="https://www.rayo.cr/img/beneficios/amigos-01.png" alt="" class="img-fluid card-img-top">
                 <div class="p-4">
                 </div>
               </div>
@@ -149,17 +172,7 @@
       
             <!-- Gallery item -->
             <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-              <div class="bg-white rounded shadow-sm"><img src="https://res.cloudinary.com/dlxejuzfi/image/upload/v1574268362/amigos-02_rfedx4.png" alt="" class="img-fluid card-img-top">
-                <div class="p-4">
-    
-                </div>
-              </div>
-            </div>
-            <!-- End -->
-      
-            <!-- Gallery item -->
-            <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-              <div class="bg-white rounded shadow-sm"><img src="https://res.cloudinary.com/dlxejuzfi/image/upload/v1574268170/amigos-03_ibk5pu.png" alt="" class="img-fluid card-img-top">
+              <div class="bg-white rounded shadow-sm"><img src="https://www.rayo.cr/img/beneficios/amigos-02.png" alt="" class="img-fluid card-img-top">
                 <div class="p-4">
     
                 </div>
@@ -169,7 +182,17 @@
       
             <!-- Gallery item -->
             <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-              <div class="bg-white rounded shadow-sm"><img src="https://res.cloudinary.com/dlxejuzfi/image/upload/v1574268393/amigos-04_ml4pda.png" alt="" class="img-fluid card-img-top">
+              <div class="bg-white rounded shadow-sm"><img src="https://www.rayo.cr/img/beneficios/amigos-03.png" alt="" class="img-fluid card-img-top">
+                <div class="p-4">
+    
+                </div>
+              </div>
+            </div>
+            <!-- End -->
+      
+            <!-- Gallery item -->
+            <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+              <div class="bg-white rounded shadow-sm"><img src="https://www.rayo.cr/img/beneficios/amigos-04.png" alt="" class="img-fluid card-img-top">
                 <div class="p-4">
                 </div>
               </div>

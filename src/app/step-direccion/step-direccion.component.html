@@ -10,6 +10,9 @@
                             <select name="miselect" formControlName="pais" class="form-control" style="height: 37px !important;" >
                                 <option [value]="item" *ngFor="let item of  paisValores">{{item}}</option>
                             </select>
+                            <p [hidden] ="PaisSinSeleccionar" style="color: red; font-weight: bold;  text-transform: uppercase;">
+                                Es un campo requerido
+                              </p>
                             <div *ngIf="form.get('pais')?.errors && form.get('pais')?.touched">
                                 <p *ngIf="form.get('pais')?.hasError('required')" style="color: red; font-weight: bold; text-transform: uppercase;">
                                   Es un campo requerido

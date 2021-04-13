@@ -11,6 +11,8 @@ import { StepDireccionComponent } from './step-direccion/step-direccion.componen
 import { NoCumpleRequisitosComponent } from './no-cumple-requisitos/no-cumple-requisitos.component';
 import { PrestamoActivoComponent } from './prestamo-activo/prestamo-activo.component';
 import { ClienteExisteComponent } from './cliente-existe/cliente-existe.component';
+import { RayoPlusSolicitudComponent } from './rayo-plus-solicitud/rayo-plus-solicitud.component';
+
 
 const routes: Routes = [
   {
@@ -60,6 +62,10 @@ const routes: Routes = [
   {
     path:'clienteExiste',
     component:ClienteExisteComponent
+  },
+  {
+    path:'rayoplussolicitud/:cantidadPrestamosPlus',
+    component: RayoPlusSolicitudComponent
   }
   
 

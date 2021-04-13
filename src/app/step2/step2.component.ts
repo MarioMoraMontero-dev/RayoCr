@@ -77,6 +77,7 @@ export class Step2Component implements OnInit {
    public ProcesandoSolicitudSucces:boolean|undefined;
    public DesactivarBoton:boolean|undefined;
    public ErrorTamanoArchivos:boolean|undefined;
+   public PaisSinSeleccionar:boolean|undefined;
 
    
    @Input() soliNew = new NewSolicitud();
@@ -88,7 +89,7 @@ export class Step2Component implements OnInit {
     token : any;
     login: any = [];
     solicitudSend: any = [];
-    paisValores:string[]=["Costa Rica"];
+    paisValores:string[]=["--Seleccione un valor --","Costa Rica"];
     provinciaValores:string[] =[];
     cantonValores:string[] =[];
     distritoValores:string[]=[];
@@ -209,6 +210,8 @@ export class Step2Component implements OnInit {
     this.ProcesandoSolicitudSucces = true;
     this.DesactivarBoton = false;
     this.ErrorTamanoArchivos = true;
+    this.soliNew.pais = "--Seleccione un valor --";
+    this.PaisSinSeleccionar = true;
   }
   
 
@@ -1255,29 +1258,34 @@ export class Step2Component implements OnInit {
    }
   }
   getToken(){
-    if(this.distrito == '-Seleccione un valor-' || this.provincia == '-Seleccione un valor-'  || this.canton == '-Seleccione un valor-' ){
-      this.open('focusFirst');
-    }else{
-      if(this.soliNew.salarioMensual < 280000){
-        this.router.navigate(['requisitos']);
+    if(this.soliNew.pais != "--Seleccione un valor --"){
+      if(this.distrito == '-Seleccione un valor-' || this.provincia == '-Seleccione un valor-'  || this.canton == '-Seleccione un valor-' ){
+        this.open('focusFirst');
       }else{
-      if(this.tamanoDocOrden >= 3676333 || this.tamanoDocCedula >= 3676333){
-        this.ErrorTamanoArchivos = false;
-      }else{
-      this.login=[];
-      this.ProcesandoSolicitudSucces = false;
-      this.DesactivarBoton = true;
-      this.ErrorAlCrearLaSolicitud = true;
-      this.ErrorTamanoArchivos = true;
-      this.rest.getToken().subscribe((data: {})=>{
-      console.log(data);
-      this.login.push(data);
-      this.sendSolicitudPortal(this.login);
-      console.log(this.login);
-    })
-  }
-      }
+        if(this.soliNew.salarioMensual < 280000){
+          this.router.navigate(['requisitos']);
+        }else{
+        if(this.tamanoDocOrden >= 3676333 || this.tamanoDocCedula >= 3676333){
+          this.ErrorTamanoArchivos = false;
+        }else{
+        this.login=[];
+        this.ProcesandoSolicitudSucces = false;
+        this.DesactivarBoton = true;
+        this.ErrorAlCrearLaSolicitud = true;
+        this.ErrorTamanoArchivos = true;
+        this.rest.getToken().subscribe((data: {})=>{
+        console.log(data);
+        this.login.push(data);
+        this.sendSolicitudPortal(this.login);
+        console.log(this.login);
+      })
     }
+        }
+      }
+    }else{
+      this.PaisSinSeleccionar = false;
+    }
+
 
 }
 
@@ -1298,7 +1306,7 @@ sendSolicitudPortal(datos:any){
       for(let j of this.jsonEntrante) {
         if(j.Mensaje == 'Solicitud creada correctamente'){
           
-          this.router.navigate(['step3Primerizos',j.Id],{state: {data:{id:j.Id,monto:j.monto ,interes:j.interes ,tecno:j.tecno,descuento:j.descuento,totalPagar:j.totalPagar, aval:j.aval, plazo:plazox}}});
+          this.router.navigate(['step3Primerizos',j.Id],{state: {data:{id:j.Id,monto:j.monto ,interes:j.interes ,tecno:j.tecno,descuento:j.descuento,totalPagar:j.totalPagar, aval:j.aval,iva:j.iva, plazo:plazox,servicioFE:j.servicioFE}}});
         }else{
           if(j.Mensaje == 'Cliente Existe'){
             
@@ -1355,6 +1363,7 @@ private buildForm(){
     numeroDeTelefono2:['',[Validators.required,Validators.pattern("^[0-9]*"),Validators.min(20000000)]],
   });
   this.form.controls['moneda'].setValue('Colones', {onlySelf: true});
+  this.form.controls['pais'].setValue('--Seleccione un valor --', {onlySelf: true});
   //#region Nombre
     this.form.get('nombreCompleto')?.valueChanges
     .pipe(
@@ -1425,6 +1434,7 @@ private buildForm(){
         this.pais = value;
         this.provincias();
         this.soliNew.pais = value;
+        this.PaisSinSeleccionar = true;
     });
     //#endregion pais
 
@@ -1436,6 +1446,7 @@ private buildForm(){
         this.provincia = value;
         this.cantones();
         this.soliNew.provincia = value;
+        this.PaisSinSeleccionar = true;
     });
   //#endregion Provincia
 
@@ -1735,6 +1746,7 @@ solicitarPrimerizos(event:Event){
   event.preventDefault();
   if(this.form.valid){
     const values = this.form.value;
+    this.PaisSinSeleccionar = true;
     if(this.DeseaMensajeria == 'Si' && this.DireccionDeEnvioValidator == ''){
       this.open('focusFirst');
     }else{
@@ -1744,6 +1756,9 @@ solicitarPrimerizos(event:Event){
     
   }else{
     this.form.markAllAsTouched();
+    if(this.soliNew.pais == "--Seleccione un valor --"){
+      this.PaisSinSeleccionar = false;
+    }
     console.log(this.form.getError);
     this.CamposSinCompletar = false;
     this.DesactivarBoton = false;

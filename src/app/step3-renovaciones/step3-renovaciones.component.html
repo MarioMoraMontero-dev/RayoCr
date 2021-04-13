@@ -36,6 +36,7 @@
                                                             </b>
                                                         </td>
                                                     </tr>
+                                                    <!-- ************************ -->
                                                     <tr id="2Row">
                                                         <td style="text-align: center; ">Interés:</td>
                                                         <td style="text-align: center; " id="newdate2">
@@ -46,9 +47,23 @@
                                                             </b>
                                                         </td>
                                                     </tr>
+                                                    <!-- ************************ -->
+                                                    <tr id="8Row">
+                                                        <td style="text-align: center; ">
+                                                            Cupo Administrativo:
+                                                        </td>
+                                                        <td style="text-align: center; " id="newdate6">
+                                                            <b>
+                                                                <span id="iva">
+                                                                    {{aval |currency:'₡'}}
+                                                                </span>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                    
                                                     <tr id="4Row">
                                                         <td style="text-align: center; ">
-                                                            Tecnología:
+                                                            Monto Bruto Tecnología:
                                                         </td>
                                                         <td style="text-align: center; " id="newdate6">
                                                             <b>
@@ -58,33 +73,10 @@
                                                             </b>
                                                         </td>
                                                     </tr>
-                                                    <tr id="8Row">
-                                                        <td style="text-align: center; ">
-                                                            Cupo administracion:
-                                                        </td>
-                                                        <td style="text-align: center; " id="newdate6">
-                                                            <b>
-                                                                <span id="iva">
-                                                                    {{aval|currency:'₡'}}
-                                                                </span>
-                                                            </b>
-                                                        </td>
-                                                    </tr>
-                                                    <tr id="5Row">
-                                                        <td style="text-align: center; ">
-                                                            Sub Total:
-                                                        </td>
-                                                        <td style="text-align: center; " id="newdate5">
-                                                            <b>
-                                                                <span id="subTotal">
-                                                                    {{total|currency:'₡'}}
-                                                                </span>
-                                                            </b>
-                                                        </td>
-                                                    </tr>
+                                                    <!--******************************-->
                                                     <tr id="6Row">
                                                         <td style="text-align: center; ">
-                                                            Descuento:
+                                                            Descuento Tecnología:
                                                         </td>
                                                         <td style="text-align: center; " id="newdate5">
                                                             <b>
@@ -94,14 +86,47 @@
                                                             </b>
                                                         </td>
                                                     </tr>
+                                                    <tr id="4Row">
+                                                        <td style="text-align: center; ">
+                                                            Monto Neto Tecnología:
+                                                        </td>
+                                                        <td style="text-align: center; " id="newdate6">
+                                                            <b>
+                                                                <span id="tecno">
+                                                                    {{servicioFE |currency:'₡'}}
+                                                                </span>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                    <!--******************************-->
+                                                    <tr id="8Row">
+                                                        <td style="text-align: center; ">
+                                                            I.V.A:
+                                                        </td>
+                                                        <td style="text-align: center; " id="newdate6">
+                                                            <b>
+                                                                <span id="iva">
+                                                                    {{iva |currency:'₡'}}
+                                                                </span>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                  
+                                                    
+                                                   
                                                     <tr id="7Row">
                                                         <td style="text-align: center; ">
+                                                        <strong>
                                                             TOTAL A PAGAR:
+                                                        </strong>
                                                         </td>
                                                         <td style="text-align: center; " id="newdate8">
                                                             <b>
                                                                 <span id="total">
-                                                                    {{total|currency:'₡'}}
+                                                                    <strong>
+                                                                         {{total|currency:'₡'}}
+                                                                    </strong>
+
                                                                 </span>
                                                             </b>
                                                         </td>
@@ -121,20 +146,19 @@
                                     <br/>
                                     <br/>
                                     <div class="float-center" style="margin-top:20px;text-align:center; border:none;">
+                                        <p class="BLUE" style="margin: 10px 0 10px 0;">Si adjunta la orden patronal su depósito estará en 24 horas<br/>
+                                            Si NO adjunta la orden patronal su depósito se tardará más de 24 horas</p>
+                                            <input type="file" title="Cargar Orden Patronal" (change)="onFileChanged($event)"  lang="es" accept="image/png, .jpeg, .jpg, .pdf" style="margin-left: 25%;margin-top: 10px; height: 40px !important;"/>
+                                    </div>
+
+                                    <div class="float-center" style="margin-top:20px;text-align:center; border:none;">
                                         <p class="BLUE" style="margin: 10px 0 10px 0;">¿Requirió ayuda en el proceso?</p>
                                         <select name="miselect" [(ngModel)]="procesoFinal.requirioAyuda" class="form-control" style="height: 37px !important;">
                                             <option [value]="item" *ngFor="let item of requirioAyuda">{{item}}</option>
                                         </select>
                                         <span>{{requirioAyudaRequrido}}</span>
                                     </div>
-                                    <br/>
-                                    <br/>
-                                    <div class="float-center" style="margin-top:20px;text-align:center; border:none;">
-                                        <p class="BLUE" style="margin: 10px 0 10px 0;">Si adjunta la orden patronal su depósito estará en 24 horas<br/>
-                                            Si NO adjunta la orden patronal su depósito se tardará más de 24 horas</p>
-                                            <input type="file" title="Cargar Orden Patronal" (change)="onFileChanged($event)"  lang="es" accept="image/png, .jpeg, .jpg, .pdf" style="margin-left: 25%;margin-top: 10px; height: 40px !important;"/>
-                                    </div>
-
+                                <!--
                                     <div class="float-center" style="margin-top:20px;text-align:center; border:none;">
                                         <p class="BLUE" style="margin: 10px 0 10px 0;">Si adjunta una fotocopia de la cédula por ambos lados su depósito estará en 24 horas <br/>
                                             Si NO adjunta una fotocopia de la cédula su depósito se tardará más de 24 horas</p>
@@ -142,7 +166,7 @@
                                             <input type="file" title="Cargar cedula" (change)="onFileChangedCedula($event)"  lang="es" accept="image/png, .jpeg, .jpg, .pdf" style="margin-left: 25%;margin-top: 10px; height: 40px !important;"/>
                                     </div>
 
-                                  
+                                -->
                                     
                                     <br/>
                                     <br/>
@@ -229,7 +253,15 @@
                                                
                                             </table>
                                         </div>
+                                            
+                                            <div class="alert alert-danger" [hidden]='ErrorAlCrearLaSolicitud'><strong>Error!</strong>
+                                                Ocurrio un error al crear la solicitud.
+                                            </div>
+                                            <div class="alert alert-success" [hidden]='ProcesandoSolicitudSucces'><strong>Espera!</strong>
+                                                Estamos procesando tu solicitud, por favor espera.
+                                            </div>
 
+                                            
                                     </div>
                                     <div Style="margin-top:20px;margin-bottom:20px;">
                                         <a [routerLink]="['']" class="btn btn btn-danger" style="color: #f9f9f9;" >Cancelar</a>

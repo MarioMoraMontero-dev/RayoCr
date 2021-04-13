@@ -101,7 +101,7 @@ renovar(datos:any){
       if(l.Estado == 'Moroso'){
         this.router.navigate(['prestamoActivo']);
       }else{
-        this.router.navigate(['renovaciones/',this.idCliente,l.Id],{state: {data:{id:l.Id,monto:l.monto ,interes:l.interes ,tecno:l.tecno,descuento:l.descuento,totalPagar:l.totalPagar,plazo:l.plazo,aval:l.aval}}});
+        this.router.navigate(['renovaciones/',this.idCliente,l.Id],{state: {data:{id:l.Id,monto:l.monto ,interes:l.interes ,tecno:l.tecno,descuento:l.descuento,totalPagar:l.totalPagar,plazo:l.plazo,aval:l.aval,iva:l.iva,servicioFE:l.servicioFE}}});
       }
      }  
   });
