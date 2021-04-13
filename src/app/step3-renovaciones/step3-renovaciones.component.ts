@@ -63,6 +63,8 @@ export class Step3RenovacionesComponent implements OnInit {
   public descuento:number|undefined;
   public total:number|undefined;
   public aval:number|undefined;
+  public iva:number|undefined;
+  public servicioFE!:number;
   public cc1 : HTMLElement | undefined;
   public cc2 : HTMLElement | undefined;
   public cc3 : HTMLElement | undefined;
@@ -99,9 +101,11 @@ export class Step3RenovacionesComponent implements OnInit {
     this.monto = Number(this.data.monto);
     this.interes = Number(this.data.interes);
     this.aval = Number(this.data.aval);
+    this.iva = Number(this.data.iva);
     this.tecno =Number(this.data.tecno);
     this.descuento =Number(this.data.descuento);
     this.total = Number(this.data.totalPagar);
+    this.servicioFE = Number(this.data.servicioFE);
     this.plazo = this.data.plazo;
     this.cc1 = document.getElementById('fecha1')!;
     this.cc2 = document.getElementById('fecha2')!;
@@ -217,13 +221,13 @@ thirdDate(tdate:Date){
 
 calculafechas(diaSeleccionado:string,total:number){
   let today: Date = new Date();
-   if(diaSeleccionado == '15 días'){
+   if(diaSeleccionado == '15 días' ){
      this.fecha1 = this.firstDate(today);
      this.fecha2 = '';
      this.fecha3 = '';
      this.Abono1 = total;
    }else{
-    if(diaSeleccionado == '30 días' || diaSeleccionado == 'Cliente Especial'){
+    if(diaSeleccionado == '30 días' ){
      
       this.fecha1 = this.firstDate(today);
       this.fecha2 = this.secondDate(today);
@@ -241,18 +245,26 @@ calculafechas(diaSeleccionado:string,total:number){
       this.Abono2 = total/3;
       this.Abono3 = total/3;
       this.Abono2Texto = 'Segundo Abono';
+   }else{
+    if(diaSeleccionado == 'Cliente Especial' ){
+     
+      this.fecha1= this.secondDate(today);
+      this.Abono1 = total;
+      
+      this.Abono2Texto = 'Abono Final';
+   }
    }
    }
  }
  }
 ocultarTD(diaSeleccionado:string){
-      if(diaSeleccionado == '15 días'){
+      if(diaSeleccionado == '15 días' || diaSeleccionado == 'Cliente Especial' ){
         if(this.cc2 != undefined && this.cc3 != undefined){
           this.cc2.setAttribute("style", "display:none;");
           this.cc3.setAttribute("style", "display:none;");
         }
       }else{
-        if(diaSeleccionado == '30 días' || diaSeleccionado == 'Cliente Especial'){
+        if(diaSeleccionado == '30 días'){
         if(this.cc2 != undefined && this.cc3 != undefined){
           this.cc2.setAttribute("style", "display;");
           this.cc3.setAttribute("style", "display:none;");

@@ -5,13 +5,13 @@
         <h1 class="jumbotron-heading"><span style="color: purple; font-weight: bold;">RAYO</span> <span style="color: orange; font-weight: bold;">PLUS</span></h1>
         <p class="lead text-muted">Seleccione el monto por el cual quiere solicitar su préstamo:</p>
         <p>
-          <button href="#" class="btn btn-primary my-2" (click)="obtenervalor('₡30 000')">₡30 000</button>
+          <button href="#" class="btn btn-primary my-2" (click)="obtenervalor(30000)">₡30 000</button>
           &nbsp;&nbsp;
-          <button href="#" class="btn btn-primary my-2" (click)="obtenervalor('₡35 000')" [disabled] ="false">₡35 000</button>
+          <button href="#" class="btn btn-primary my-2" (click)="obtenervalor(35000)" [disabled] ="false">₡35 000</button>
           &nbsp;&nbsp;
         </p>
 
-        <p class="lead text-muted">El monto seleccionado es: {{valorSeleccionado}}</p>
+        <p class="lead text-muted">El monto seleccionado es: {{valorSeleccionado|currency:'₡'}}</p>
 <hr/>
         <p class="lead text-muted">Genial ahora selecciona las cuotas del préstamo:</p>
 
@@ -23,7 +23,7 @@
             </div>
           
         <hr/>
-        <p class="lead text-muted">Propuesta</p>
+        <h3 >  <span style="color: purple; font-weight: bold;">PROPU</span> <span style="color: orange; font-weight: bold;">ESTA</span>  &nbsp;&nbsp; <span style="color: purple; font-weight: bold;"> RAYO</span> <span style="color: orange; font-weight: bold;">PLUS</span></h3>
         <table class="table">
             <thead>
               <tr>
@@ -34,182 +34,121 @@
             </thead>
             <tbody>
               <tr>
-                <td>Valor sugerido:</td>
-                <td>##</td>
+                <td>Valor Elegido:</td>
+                <td>{{valorSeleccionado|currency:'₡'}}</td>
               </tr>
               <tr>
                 <td>Interés:</td>
-                <td>##</td>
+                <td>{{interes |currency:'₡'}}</td>
               </tr>
               <tr>
                 <td>Tecnología:</td>
-                <td>##</td>
+                <td>{{tecnologia |currency:'₡'}}</td>
               </tr>
               <tr>
                 <td>Cupo administración:</td>
-                <td>##</td>
+                <td>{{aval |currency:'₡'}}</td>
+              </tr>
+              <tr>
+                <td>I.V.A:</td>
+                <td>{{iva |currency:'₡'}}</td>
+              </tr>
+              <tr>
+                <td>Descuento:</td>
+                <td>{{descuento |currency:'₡'}}</td>
               </tr>
               <tr>
                 <td>Sub Total:</td>
-                <td>##</td>
+                <td>{{subtotal |currency:'₡'}}</td>
               </tr>
               <tr>
-                <td>Valor sugerido:</td>
-                <td>##</td>
-              </tr>
-              <tr>
-                <td>Valor sugerido:</td>
-                <td>##</td>
+                <td><strong>TOTAL A PAGAR:</strong></td>
+                <td>{{totalPagar |currency:'₡'}}</td>
               </tr>
             </tbody>
           </table>
+          <table class="table">
+            <tr id="1Row">
+                <th style="text-align: center; ">
+                    Abono
+                </th>
+                <th style="text-align: center; ">
+                    Fecha de Pago
+                </th>
+                <th style="text-align: center; ">
+                    Monto 
+                </th>
+            </tr>
+            
+           
+                <tr id="fecha1">
+                    
+                    <td style="text-align: center; " id="newdate">
+                        Abono unico
+                    </td>
+                    <td style="text-align: center; color:black;" id="pagos">
+                        <span>
+                            {{fecha1}}
+                        </span>
+                        
 
+                    </td>
+                    <td style="text-align: center; color:black;" id="pagos">
+                        <span>
+                            {{Abono1|currency:'₡'}}
+                        </span>
+                        
+
+                    </td>
+                </tr>
+                <tr id="fecha2">
+                    
+                    <td style="text-align: center; " id="newdate">
+                        <span>
+                            {{Abono2Texto}}
+                        </span>
+                       
+                    </td>
+                    <td style="text-align: center; color:black;" id="pagos">
+                        <span>
+                            {{fecha2}}
+                        </span>
+                        
+
+                    </td>
+                    <td style="text-align: center; color:black;" id="pagos">
+                        <span>
+                            {{Abono2|currency:'₡'}}
+                        </span>
+
+                    </td>
+                </tr>
+                <tr id="fecha3">
+                    
+                    <td style="text-align: center; " id="newdate">
+                        Abono final
+                    </td>
+                    <td style="text-align: center; color:black;" id="pagos">
+                        <span>
+                            {{fecha3}}
+                        </span>
+                        
+
+                    </td>
+                    <td style="text-align: center; color:black;" id="pagos">
+                        <span>
+                            {{Abono3|currency:'₡'}}
+                        </span>
+
+                    </td>
+                </tr>
+           
+        </table>
       </div>
     </section>
 
     <div class="album py-5 bg-light">
-      <div class="container">
 
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
   </main>

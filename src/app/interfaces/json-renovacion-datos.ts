@@ -10,5 +10,6 @@ export interface datosRenovacion {
     Mensaje:string;
     plazo:string;
     aval:string;
+    servicioFE:string;
     
 }

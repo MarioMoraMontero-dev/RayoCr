@@ -64,7 +64,7 @@ const routes: Routes = [
     component:ClienteExisteComponent
   },
   {
-    path:'rayoplussolicitud',
+    path:'rayoplussolicitud/:cantidadPrestamosPlus',
     component: RayoPlusSolicitudComponent
   }
   

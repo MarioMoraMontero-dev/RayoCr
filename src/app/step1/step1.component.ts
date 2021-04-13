@@ -62,10 +62,11 @@ export class Step1Component implements OnInit {
 		this.interes = this.getInteres(this.valorSolicitar,this.diaSeleccionado);
 		
 		this.tecnologia = this.getTecnologia(this.valorSolicitar,this.diaSeleccionado);
-    this.iva = this.getIva(this.tecnologia);
-    this.subtotal = this.valorSolicitar+this.interes+this.tecnologia;
-    this.aval = this.getAval(this.subtotal);
-    this.totalPagar = this.subtotal+this.aval+this.iva;
+    this.aval = this.getAval(this.valorSolicitar);
+    this.iva = this.getIva(this.tecnologia + this.aval);
+    this.subtotal = this.valorSolicitar+this.interes+this.tecnologia+this.aval+this.iva;
+    
+    this.totalPagar = this.subtotal;
     this.calculafechas(this.diaSeleccionado,this.totalPagar);
     this.ocultarFechas(this.diaSeleccionado);
   }
@@ -75,102 +76,81 @@ export class Step1Component implements OnInit {
  getTecnologia(montoSolicitado:number,plazo:any)
             {
               var tecno = 0;
-                if(plazo == 15)
-                {
-                    switch (montoSolicitado) {
-                        case 20000:
-                          tecno =7500;
-                            return 7500;
-                        case 25000:
-                            return 7500;
-                        case 30000:
-                          tecno =7500;
-                            return 7500;
-                        case 35000:
-                          tecno =7500;
-                            return 7500;
-                        case 40000:
-                          tecno =10500;
-                            return 10500;
-                        case 50000: 
-                        tecno =10500;
-                            return 10500;
-                        case 75000:
-                          tecno =13500;
-                            return 13500;
-                        case 100000:
-                          tecno =19500;
-                            return 19500;
+                if(montoSolicitado == 20000){
+                  if(plazo == 15){
+                    tecno = 15 * 200;
+                  }else{
+                    if(plazo == 30){
+                      tecno =30*200;
+                    }else{
+                      if(plazo == 45){
+                        tecno = 45 * 200;
+                      }
                     }
-                    
-                }
-                if(plazo == 30)
-                {
-                    switch (montoSolicitado)
-                    {
-                        case 20000:
-                          tecno = 15000;
-                            return 15000;
-                        case 25000:
-                          tecno = 15000;
-                            return 15000;
-                        case 30000:
-                          tecno = 15000;
-                            return 15000;
-                        case 35000:
-                          tecno = 15000;
-                            return 15000;
-                        case 40000:
-                          tecno = 21000;
-                            return 21000;
-                        case 50000: 
-                        tecno = 21000;
-                            return 21000;
-                        case 75000:
-                          tecno = 27000;
-                            return 27000;
-                        case 100000:
-                          tecno = 39000;
-                            return 39000;
+                  }
+                }else{
+                  if(montoSolicitado >= 25000 && montoSolicitado <= 30000){
+                    if(plazo == 15){
+                      tecno = 15 * 300;
+                    }else{
+                      if(plazo == 30){
+                        tecno = 30*300;
+                      }else{
+                        if(plazo == 45){
+                          tecno = 45 * 300;
+                        }
+                      }
                     }
+                  }else{
+                    if(montoSolicitado >= 35000 && montoSolicitado <= 40000){
+                      if(plazo == 15){
+                        tecno =  15 * 350;
+                      }else{
+                        if(plazo == 30){
+                          tecno =  30*350;
+                        }else{
+                          if(plazo == 45){
+                            tecno =  45 * 350;
+                          }
+                        }
+                      }
+                    }else{
+                      if(montoSolicitado == 50000){
+                        if(plazo == 15){
+                          tecno =  15 * 450;
+                        }else{
+                          if(plazo == 30){
+                            tecno = 30*450;
+                          }else{
+                            if(plazo == 45){
+                              tecno =  45 * 450;
+                            }
+                          }
+                        }
+                      }else{
+                        if(montoSolicitado >= 75000 && montoSolicitado <= 100000){
+                          if(plazo == 15){
+                            tecno =  15 * 500;
+                          }else{
+                            if(plazo == 30){
+                              tecno = 30*500;
+                            }else{
+                              if(plazo == 45){
+                                tecno =  45 * 500;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  } 
                 }
-                if(plazo == 45)
-                {
-                    switch (montoSolicitado)
-                    {
-                        case 20000:
-                          tecno = 22500;
-                            return 22500;
-                        case 25000:
-                          tecno = 22500;
-                            return 22500;
-                        case 30000:
-                          tecno = 22500;
-                            return 22500;
-                        case 35000:
-                          tecno = 22500;
-                            return 22500;
-                        case 40000:
-                          tecno = 31500;
-                            return 31500;
-                        case 50000: 
-                        tecno = 31500;
-                            return 31500;
-                        case 75000:
-                          tecno = 40500;
-                            return 40500;
-                        case 100000:
-                          tecno =58500;
-                            return 58500;
-                    }    
-                }
-
                 return tecno;
             }
 
-	getAval(subTotal: number)
+	getAval(valorsolicitado: number)
 	{
-		var pAval = Math.round(subTotal*0.06);
+		var pAval = Math.round(valorsolicitado*0.06);
 		return pAval;
   }
   getIva(tecnologia: number)

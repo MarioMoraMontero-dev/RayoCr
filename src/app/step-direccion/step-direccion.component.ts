@@ -1192,8 +1192,9 @@ export class StepDireccionComponent implements OnInit {
           if(l.Estado == 'Moroso'){
             this.router.navigate(['prestamoActivo']);
           }else{
+            //iva:l.iva, 
             console.log('Total a pagar: '+l.totalPaga);
-            this.router.navigate(['renovaciones/',IdCont,l.Id],{state: {data:{id:l.Id,monto:l.monto ,interes:l.interes ,tecno:l.tecno,descuento:l.descuento,totalPagar:l.totalPagar, aval:l.aval, plazo:l.plazo}}});
+            this.router.navigate(['renovaciones/',IdCont,l.Id],{state: {data:{id:l.Id,monto:l.monto ,interes:l.interes ,tecno:l.tecno,descuento:l.descuento,totalPagar:l.totalPagar, aval:l.aval,plazo:l.plazo,servicioFE:l.servicioFE}}});
         
           }
         }

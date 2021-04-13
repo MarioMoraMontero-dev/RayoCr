@@ -44,9 +44,25 @@
                                                                 </b>
                                                             </td>
                                                         </tr>
+
+                                                        <tr id="8Row">
+                                                            <td style="text-align: center; ">
+                                                                Cupo Administrativo:
+                                                            </td>
+                                                            <td style="text-align: center; " id="newdate6">
+                                                                <b>
+                                                                    <span id="iva">
+                                                                        {{aval |currency:'₡'}}
+                                                                    </span>
+                                                                </b>
+                                                            </td>
+                                                        </tr>
+
+
+
                                                         <tr id="4Row">
                                                             <td style="text-align: center; ">
-                                                                Tecnología:
+                                                                Monto Bruto Tecnología:
                                                             </td>
                                                             <td style="text-align: center; " id="newdate6">
                                                                 <b>
@@ -56,6 +72,33 @@
                                                                 </b>
                                                             </td>
                                                         </tr>
+
+                                                        <tr id="6Row">
+                                                            <td style="text-align: center; ">
+                                                                Descuento Tecnología:
+                                                            </td>
+                                                            <td style="text-align: center; " id="newdate5">
+                                                                <b>
+                                                                    <span id="subTotal">
+                                                                        {{descuento|currency:'₡'}}
+                                                                    </span>
+                                                                </b>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr id="4Row">
+                                                            <td style="text-align: center; ">
+                                                                Monto Neto Tecnología:
+                                                            </td>
+                                                            <td style="text-align: center; " id="newdate6">
+                                                                <b>
+                                                                    <span id="tecno">
+                                                                        {{servicioFE|currency:'₡'}}
+                                                                    </span>
+                                                                </b>
+                                                            </td>
+                                                        </tr>
+                                                        
                                                         <tr id="8Row">
                                                             <td style="text-align: center; ">
                                                                 I.V.A:
@@ -68,42 +111,8 @@
                                                                 </b>
                                                             </td>
                                                         </tr>
-                                                        <tr id="8Row">
-                                                            <td style="text-align: center; ">
-                                                                Cupo administracion:
-                                                            </td>
-                                                            <td style="text-align: center; " id="newdate6">
-                                                                <b>
-                                                                    <span id="iva">
-                                                                        {{aval |currency:'₡'}}
-                                                                    </span>
-                                                                </b>
-                                                            </td>
-                                                        </tr>
-                                                        <tr id="5Row">
-                                                            <td style="text-align: center; ">
-                                                                Sub Total:
-                                                            </td>
-                                                            <td style="text-align: center; " id="newdate5">
-                                                                <b>
-                                                                    <span id="subTotal">
-                                                                        {{total|currency:'₡'}}
-                                                                    </span>
-                                                                </b>
-                                                            </td>
-                                                        </tr>
-                                                        <tr id="6Row">
-                                                            <td style="text-align: center; ">
-                                                                Descuento:
-                                                            </td>
-                                                            <td style="text-align: center; " id="newdate5">
-                                                                <b>
-                                                                    <span id="subTotal">
-                                                                        {{descuento|currency:'₡'}}
-                                                                    </span>
-                                                                </b>
-                                                            </td>
-                                                        </tr>
+                                                        
+                                                        
                                                         <tr id="7Row">
                                                             <td style="text-align: center; ">
                                                                 TOTAL A PAGAR:

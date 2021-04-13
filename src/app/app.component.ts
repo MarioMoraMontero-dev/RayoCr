@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'RayoCRPortal';
+  onActivate(event: Event) {
+    window.scrollTo(0, 0);
+  }
 }

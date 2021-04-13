@@ -8,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class RayoPlusSolicitudComponent implements OnInit {
 
   constructor() { }
- public valorSeleccionado!:String;
+ public valorSeleccionado!:number;
  public valorSolicitar!: number;
+ public descuento!: number;
  public diaSeleccionado!: number;
  public numCuota!: string| undefined;
  public interes: number | undefined;
@@ -29,145 +30,80 @@ export class RayoPlusSolicitudComponent implements OnInit {
  public cc3 : HTMLElement | undefined;
  public Abono2Texto: String | undefined;
  public Abono1Texto: String | undefined;
+ public cantidadPrestamosRPL!:number;
   ngOnInit(): void {
+
     this.numCuota = '2 cuotas';
+    this.diaSeleccionado = 30;
+    this.cantidadPrestamosRPL = 1;
+
+    this.cc1 = document.getElementById('fecha1')!;
+    this.cc2 = document.getElementById('fecha2')!;
+    this.cc3 = document.getElementById('fecha3')!;
   }
 
-  obtenervalor(valor:string){
+  obtenervalor(valor:number){
   this.valorSeleccionado = valor;
+  
+  this.calcularMontos();
   }
 
   calcularMontos()
 	{
-    
-    if(this.valorSolicitar == 55000){
-      this.valorSolicitar = 75000;
-    }else{
-      if(this.valorSolicitar == 60000){
-        this.valorSolicitar = 100000;
-      }else{
-        if(this.valorSolicitar == 45000){
-          this.valorSolicitar = 50000;
-        }
-      }
-    }
-
     console.log(this.diaSeleccionado);
-		this.interes = this.getInteres(this.valorSolicitar,this.diaSeleccionado);
-		
-		this.tecnologia = this.getTecnologia(this.valorSolicitar,this.diaSeleccionado);
-    this.iva = this.getIva(this.tecnologia);
-    this.subtotal = this.valorSolicitar+this.interes+this.tecnologia;
-    this.aval = this.getAval(this.subtotal);
-    this.totalPagar = this.subtotal+this.aval+this.iva;
+		this.interes = this.getInteres(this.valorSeleccionado,this.diaSeleccionado);
+		this.tecnologia = this.getTecnologia(this.valorSeleccionado,this.diaSeleccionado);
+    this.descuento = this.getDescuento(this.valorSeleccionado,this.diaSeleccionado,1);
+    this.aval = this.getAval(this.valorSeleccionado,this.cantidadPrestamosRPL);
+    this.iva = this.getIva(this.tecnologia,this.aval,this.descuento);
+
+    this.subtotal = this.getSubTotal(this.valorSeleccionado,this.interes,this.tecnologia);
+    
+    this.totalPagar = (this.subtotal+this.aval+this.iva)- this.descuento;
     this.calculafechas(this.diaSeleccionado,this.totalPagar);
     this.ocultarFechas(this.diaSeleccionado);
+    //
   }
 
   getTecnologia(montoSolicitado:number,plazo:any)
             {
               var tecno = 0;
-                if(plazo == 15)
-                {
-                    switch (montoSolicitado) {
-                        case 20000:
-                          tecno =7500;
-                            return 7500;
-                        case 25000:
-                            return 7500;
-                        case 30000:
-                          tecno =7500;
-                            return 7500;
-                        case 35000:
-                          tecno =7500;
-                            return 7500;
-                        case 40000:
-                          tecno =10500;
-                            return 10500;
-                        case 50000: 
-                        tecno =10500;
-                            return 10500;
-                        case 75000:
-                          tecno =13500;
-                            return 13500;
-                        case 100000:
-                          tecno =19500;
-                            return 19500;
-                    }
+              if(montoSolicitado == 30000 || montoSolicitado ==  35000){
+                tecno = (plazo * 700);
+                
+              }else{
+                if(montoSolicitado >= 40000 || montoSolicitado <= 55000){
+                  tecno = (plazo * 900);
+                  
+                }else{
+                  if(montoSolicitado >= 60000 || montoSolicitado <= 150000){
+                    tecno = (plazo * 1100);
                     
-                }
-                if(plazo == 30)
-                {
-                    switch (montoSolicitado)
-                    {
-                        case 20000:
-                          tecno = 15000;
-                            return 15000;
-                        case 25000:
-                          tecno = 15000;
-                            return 15000;
-                        case 30000:
-                          tecno = 15000;
-                            return 15000;
-                        case 35000:
-                          tecno = 15000;
-                            return 15000;
-                        case 40000:
-                          tecno = 21000;
-                            return 21000;
-                        case 50000: 
-                        tecno = 21000;
-                            return 21000;
-                        case 75000:
-                          tecno = 27000;
-                            return 27000;
-                        case 100000:
-                          tecno = 39000;
-                            return 39000;
-                    }
-                }
-                if(plazo == 45)
-                {
-                    switch (montoSolicitado)
-                    {
-                        case 20000:
-                          tecno = 22500;
-                            return 22500;
-                        case 25000:
-                          tecno = 22500;
-                            return 22500;
-                        case 30000:
-                          tecno = 22500;
-                            return 22500;
-                        case 35000:
-                          tecno = 22500;
-                            return 22500;
-                        case 40000:
-                          tecno = 31500;
-                            return 31500;
-                        case 50000: 
-                        tecno = 31500;
-                            return 31500;
-                        case 75000:
-                          tecno = 40500;
-                            return 40500;
-                        case 100000:
-                          tecno =58500;
-                            return 58500;
-                    }    
-                }
+                  }
+                  }
 
+                }
                 return tecno;
-            }
+              }
+              
+  getSubTotal(valorseleccionado: number, interes: number,tecnologia: number){
+    return valorseleccionado+ interes + tecnologia;
+  }      
 
-	getAval(subTotal: number)
+	getAval(cantidadsolicitada: number, cantidadPrestamos: number)
 	{
-		var pAval = Math.round(subTotal*0.06);
+    var pAval = 0;
+    if(cantidadPrestamos <= 1){
+      pAval	 = Math.round(cantidadsolicitada*0.10);
+    }else{
+      pAval	 = Math.round(cantidadsolicitada*0.12);
+    }
+  
 		return pAval;
   }
-  getIva(tecnologia: number)
+  getIva(tecnologia: number, aval: number,descuento :number)
 	{
-		var pIva = Math.round(tecnologia*0.13);
+		var pIva = Math.round(((tecnologia - descuento) + aval)*0.13);
 		return pIva;
   }
   
@@ -175,95 +111,422 @@ export class RayoPlusSolicitudComponent implements OnInit {
     var interes = 0;
                 if(diaSeleccionado == 15)
                 {
-                    switch (valorSolicitar) {
-                        case 20000:
-                          interes = 250;
-                          return 250;
-                        case 25000:
-                          interes = 312.50;
-                            return 312.50;
-                        case 30000:
-                          interes = 375;
-                            return 375;
-                        case 35000:
-                          interes = 437.50;
-                            return 437.50;
-                        case 40000:
-                          interes = 500;
-                            return 500;
-                        case 50000: 
-                        interes = 625;
-                            return 625;
-                        case 75000:
-                          interes = 937.50;
-                            return 937.50;
-                        case 100000:
-                          interes = 1250;
-                            return 1250;
-                    }
                     
+                    interes = ((((valorSolicitar*0.30)/12)/30)*diaSeleccionado);
                 }
                 if(diaSeleccionado == 30)
                 {
-                    switch (valorSolicitar)
-                    {
-                        case 20000:
-                          interes = 500;
-                            return 500;
-                        case 25000:
-                          interes = 625;
-                            return 625;
-                        case 30000:
-                          interes = 750;
-                            return 750;
-                        case 35000:
-                          interes = 875;
-                            return 875;
-                        case 40000:
-                          interes = 1000;
-                            return 1000;
-                        case 50000: 
-                        interes = 1250;
-                            return 1250;
-                        case 75000:
-                          interes = 1875;
-                            return 1875;
-                        case 100000:
-                          interes = 2500;
-                            return 2500;
-                    }
+                  interes = ((((valorSolicitar*0.30)/12)/30)*diaSeleccionado);
                 }
                 if(diaSeleccionado == 45)
                 {
-                    switch (valorSolicitar)
-                    {
-                        case 20000:
-                          interes = 750;
-                            return 750;
-                        case 25000:
-                          interes = 937.50;
-                            return 937.50;
-                        case 30000:
-                          interes = 1125;
-                            return 1125;
-                        case 35000:
-                          interes =1312.50;
-                            return 1312.50;
-                        case 40000:
-                          interes = 1500;
-                            return 1500;
-                        case 50000: 
-                        interes = 1875;
-                            return 1875;
-                        case 75000:
-                          interes = 2812.50
-                            return 2812.50;
-                        case 100000:
-                          interes = 3750;
-                            return 3750;
-                    }    
+                  interes = ((((valorSolicitar*0.30)/12)/30)*diaSeleccionado);
                 }
                 return interes;
+  }
+
+
+  getDescuento(valorSolicitar: number,diaSeleccionado: number,cantidadPrestamosRayoPlus: number){
+    var desc = 0;
+      if(diaSeleccionado == 15){
+        if(valorSolicitar == 30000){
+          if(cantidadPrestamosRayoPlus >= 12){
+            return 4800;
+        }else{
+           if(cantidadPrestamosRayoPlus >= 3){
+              return 4200;
+        }
+        }
+      }else{
+        if(valorSolicitar ==35000){
+          if(cantidadPrestamosRayoPlus >= 12){
+            return 5100;
+        }else{
+           if(cantidadPrestamosRayoPlus >= 3){
+              return 3700;
+        }
+             
+        }
+        }else{
+          if(valorSolicitar == 40000){
+            if(cantidadPrestamosRayoPlus >= 12){
+              return 5800;
+          }else{
+             if(cantidadPrestamosRayoPlus >= 3){
+                return 4200;
+            }  
+          }
+          }else{
+            if(valorSolicitar == 45000 ){
+              if(cantidadPrestamosRayoPlus >= 12){
+                return 3500;
+            }else{
+               if(cantidadPrestamosRayoPlus >= 3){
+                  return 1700;
+              }  
+            }
+            }else{
+              if(valorSolicitar == 50000){
+                if(cantidadPrestamosRayoPlus >= 12){
+                  return 6500;
+              }else{
+                 if(cantidadPrestamosRayoPlus >= 3){
+                    return 4500;
+                }  
+              }
+              }else{
+                if(valorSolicitar == 55000){
+                  if(cantidadPrestamosRayoPlus >= 12){
+                    return 4200;
+                }else{
+                   if(cantidadPrestamosRayoPlus >= 3){
+                      return 2000;
+                  }  
+                }
+                }else{
+                  if(valorSolicitar == 60000){
+                    if(cantidadPrestamosRayoPlus >= 12){
+                      return 4900;
+                  }else{
+                     if(cantidadPrestamosRayoPlus >= 3){
+                        return 2500;
+                    }  
+                  }
+                  }else{
+                    if(valorSolicitar == 80000){
+                      if(cantidadPrestamosRayoPlus >= 12){
+                        return 16087.5;
+                    }else{
+                       if(cantidadPrestamosRayoPlus >= 3){
+                          return 12687.5;
+                      }  
+                    } 
+                    }else{
+                      if(valorSolicitar == 120000){
+                        if(cantidadPrestamosRayoPlus >= 12){
+                          return 14050;
+                      }else{
+                         if(cantidadPrestamosRayoPlus >= 3){
+                            return 9250;
+                        }  
+                      }
+                      }else{
+                        if(valorSolicitar == 130000){
+                          if(cantidadPrestamosRayoPlus >= 12){
+                            return 14575;
+                        }else{
+                           if(cantidadPrestamosRayoPlus >= 3){
+                            	return 9375;
+                       	 }  
+                        }
+                        }else{
+                          if(valorSolicitar == 140000){
+                            if(cantidadPrestamosRayoPlus >= 12){
+                              return 15100;
+                          }else{
+                             if(cantidadPrestamosRayoPlus >= 3){
+                                return 9500;
+                            }  
+                          }
+                          }else{
+                            if(valorSolicitar == 150000){
+                              if(cantidadPrestamosRayoPlus >= 12){
+                                return 15625;
+                            }else{
+                               if(cantidadPrestamosRayoPlus >= 3){
+                                  return 9625;
+                              }  
+                            }
+                            }else{
+                              if(valorSolicitar == 85000){
+                                if(cantidadPrestamosRayoPlus >= 12){
+                                  return 16087.5;
+                              }else{
+                                 if(cantidadPrestamosRayoPlus >= 3){
+                                    return 12687.5;
+                                }  
+                              }  
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }else{
+      if(diaSeleccionado == 30){
+        if(valorSolicitar == 30000){
+          if(cantidadPrestamosRayoPlus >= 12){
+            return 9600;
+        }else{
+           if(cantidadPrestamosRayoPlus >= 3){
+              return 8400;
+          }  
+        }
+      }else{
+        if(valorSolicitar ==35000){
+          if(cantidadPrestamosRayoPlus >= 12){
+            return 9150;
+        }else{
+           if(cantidadPrestamosRayoPlus >= 3){
+              return 7750;
+          }  
+        }
+        }else{
+          if(valorSolicitar == 40000){
+            if(cantidadPrestamosRayoPlus >= 12){
+              return 9600;
+          }else{
+             if(cantidadPrestamosRayoPlus >= 3){
+                return 8000;
+            }  
+          }
+          }else{
+            if(valorSolicitar == 45000 ){
+              if(cantidadPrestamosRayoPlus >= 12){
+                return 4050;
+            }else{
+               if(cantidadPrestamosRayoPlus >= 3){
+                  return 2250;
+              }  
+            }
+            }else{
+              if(valorSolicitar == 50000){
+                if(cantidadPrestamosRayoPlus >= 12){
+                  return 10500;
+              }else{
+                 if(cantidadPrestamosRayoPlus >= 3){
+                    return 8500;
+                }  
+              }
+              }else{
+                if(valorSolicitar == 55000){
+                  if(cantidadPrestamosRayoPlus >= 12){
+                    return 4950;
+                }else{
+                   if(cantidadPrestamosRayoPlus >= 3){
+                      return 2750;
+                  }  
+                }
+                }else{
+                  if(valorSolicitar == 60000){
+                    if(cantidadPrestamosRayoPlus >= 12){
+                      return 5400;
+                  }else{
+                     if(cantidadPrestamosRayoPlus >= 3){
+                        return 3000;
+                    }  
+                  }
+                  }else{
+                    if(valorSolicitar == 80000){
+                      if(cantidadPrestamosRayoPlus >= 12){
+                        return 15825;
+                    }else{
+                       if(cantidadPrestamosRayoPlus >= 3){
+                          return 12625;
+                      }  
+                    } 
+                    }else{
+                      if(valorSolicitar == 120000){
+                        if(cantidadPrestamosRayoPlus >= 12){
+                          return 23300;
+                      }else{
+                         if(cantidadPrestamosRayoPlus >= 3){
+                            return 18500;
+                        }  
+                      } 
+                      }else{
+                        if(valorSolicitar == 130000){
+                          if(cantidadPrestamosRayoPlus >= 12){
+                            return 23950;
+                        }else{
+                           if(cantidadPrestamosRayoPlus >= 3){
+                            	return 18750;
+                       	 }  
+                        } 
+                        }else{
+                          if(valorSolicitar == 140000){
+                            if(cantidadPrestamosRayoPlus >= 12){
+                              return 24600;
+                          }else{
+                             if(cantidadPrestamosRayoPlus >= 3){
+                                return 19000;
+                            }  
+                          }
+                          }else{
+                            if(valorSolicitar == 150000){
+                              if(cantidadPrestamosRayoPlus >= 12){
+                                return 25250;
+                            }else{
+                               if(cantidadPrestamosRayoPlus >= 3){
+                                  return 19250;
+                              }  
+                            } 
+                            }else{
+                              if(valorSolicitar == 85000){
+                                
+                              if(cantidadPrestamosRayoPlus >= 12){
+                                return 10275;
+                            }else{
+                              if(cantidadPrestamosRayoPlus >= 3){
+                                  return 6875;
+                              }  
+                            } 
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }else{
+      if(diaSeleccionado == 45){
+        if(valorSolicitar == 30000){
+          if(cantidadPrestamosRayoPlus >= 12){
+            return 17700;
+        }else{
+           if(cantidadPrestamosRayoPlus >= 3){
+              return 16500;
+          }  
+        }
+      }else{
+        if(valorSolicitar ==35000){
+          if(cantidadPrestamosRayoPlus >= 12){
+            return 12150;
+        }else{
+           if(cantidadPrestamosRayoPlus >= 3){
+              return 10750;
+          }  
+        } 
+        }else{
+          if(valorSolicitar == 40000){
+            if(cantidadPrestamosRayoPlus >= 12){
+              return 20600;
+          }else{
+             if(cantidadPrestamosRayoPlus >= 3){
+                return 19000;
+            }  
+          }
+          }else{
+            if(valorSolicitar == 45000 ){
+              if(cantidadPrestamosRayoPlus >= 12){
+                return 20050;
+            }else{
+               if(cantidadPrestamosRayoPlus >= 3){
+                  return 18250;
+              }  
+            } 
+            }else{
+              if(valorSolicitar == 50000){
+                if(cantidadPrestamosRayoPlus >= 12){
+                  return 21000;
+              }else{
+                 if(cantidadPrestamosRayoPlus >= 3){
+                    return 19000;
+                }  
+              } 
+              }else{
+                if(valorSolicitar == 55000){
+                  if(cantidadPrestamosRayoPlus >= 12){
+                    return 20450;
+                }else{
+                    if(cantidadPrestamosRayoPlus >= 12){
+                   return 18250;
+                }  
+                } 
+                }else{
+                  if(valorSolicitar == 60000){
+                    if(cantidadPrestamosRayoPlus >= 12){
+                      return 28900;
+                  }else{
+                     if(cantidadPrestamosRayoPlus >= 3){
+                        return 26500;
+                    }  
+                  }
+                  }else{
+                    if(valorSolicitar == 80000){
+                      if(cantidadPrestamosRayoPlus >= 12){
+                        return 44512.5;
+                    }else{
+                       if(cantidadPrestamosRayoPlus >= 3){
+                          return 41312.5;
+                      }  
+                    } 
+                    }else{
+                      if(valorSolicitar == 120000){
+                        if(cantidadPrestamosRayoPlus >= 12){
+                          return 32550;
+                      }else{
+                         if(cantidadPrestamosRayoPlus >= 3){
+                            return 27750;
+                        }  
+                      }
+                      }else{
+                        if(valorSolicitar == 130000){
+                          if(cantidadPrestamosRayoPlus >= 12){
+                            return 33325;
+                        }else{
+                           if(cantidadPrestamosRayoPlus >= 3){
+                            	return 28125;
+                       	 }  
+                        }
+                        }else{
+                          if(valorSolicitar == 140000){
+                            if(cantidadPrestamosRayoPlus >= 12){
+                              return 34100;
+                          }else{
+                             if(cantidadPrestamosRayoPlus >= 3){
+                                return 28500;
+                            }  
+                          }
+                          }else{
+                            if(valorSolicitar == 150000){
+                              if(cantidadPrestamosRayoPlus >= 12){
+                                return 34875;
+                            }else{
+                               if(cantidadPrestamosRayoPlus >= 3){
+                                  return 28875;
+                              }  
+                            } 
+                            }else{
+                              if(valorSolicitar == 85000){
+                                if(cantidadPrestamosRayoPlus >= 12){
+                                  return 43962.5;
+                              }else{
+                                 if(cantidadPrestamosRayoPlus >= 3){
+                                    return 40562.5;
+                                }  
+                              } 
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+        }
+      } 
+    }
+         
+return 0;
   }
 
   calculafechas(diaSeleccionado: number,total:number){
@@ -299,6 +562,7 @@ export class RayoPlusSolicitudComponent implements OnInit {
      }
    }
    }
+
    firstDate(tdate : Date){
                   var day:number = tdate.getDate();
                   var month:number = tdate.getMonth() + 1;
