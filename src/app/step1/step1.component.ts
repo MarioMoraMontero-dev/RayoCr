@@ -78,76 +78,104 @@ export class Step1Component implements OnInit {
               var tecno = 0;
                 if(montoSolicitado == 20000){
                   if(plazo == 15){
-                    tecno = 15 * 200;
+                    tecno = 15 * 250;
                   }else{
                     if(plazo == 30){
-                      tecno =30*200;
+                      tecno =30*250;
                     }else{
                       if(plazo == 45){
-                        tecno = 45 * 200;
+                        tecno = 45 * 250;
                       }
                     }
                   }
                 }else{
-                  if(montoSolicitado >= 25000 && montoSolicitado <= 30000){
+                  if(montoSolicitado == 25000){
                     if(plazo == 15){
-                      tecno = 15 * 300;
+                      tecno = 15 * 400;
                     }else{
                       if(plazo == 30){
-                        tecno = 30*300;
+                        tecno = 30*400;
                       }else{
                         if(plazo == 45){
-                          tecno = 45 * 300;
+                          tecno = 45 * 400;
                         }
                       }
                     }
                   }else{
-                    if(montoSolicitado >= 35000 && montoSolicitado <= 40000){
+                    if(montoSolicitado >= 30000 && montoSolicitado <= 35000){
                       if(plazo == 15){
-                        tecno =  15 * 350;
+                        tecno =  15 * 425;
                       }else{
                         if(plazo == 30){
-                          tecno =  30*350;
+                          tecno =  30*425;
                         }else{
                           if(plazo == 45){
-                            tecno =  45 * 350;
+                            tecno =  45 * 425;
                           }
                         }
                       }
                     }else{
                       if(montoSolicitado == 50000){
                         if(plazo == 15){
-                          tecno =  15 * 450;
+                          tecno =  15 * 550;
                         }else{
                           if(plazo == 30){
-                            tecno = 30*450;
+                            tecno = 30* 550;
                           }else{
                             if(plazo == 45){
-                              tecno =  45 * 450;
+                              tecno =  45 * 550;
                             }
                           }
                         }
                       }else{
-                        if(montoSolicitado >= 75000 && montoSolicitado <= 100000){
+                        if(montoSolicitado == 75000){
                           if(plazo == 15){
-                            tecno =  15 * 500;
+                            tecno =  15 * 800;
                           }else{
                             if(plazo == 30){
-                              tecno = 30*500;
+                              tecno = 30*800;
                             }else{
                               if(plazo == 45){
-                                tecno =  45 * 500;
+                                tecno =  45 * 800;
                               }
                             }
                           }
+                        }else{
+                          if(montoSolicitado == 40000){
+                            if(plazo == 15){
+                              tecno =  15 * 500;
+                            }else{
+                              if(plazo == 30){
+                                tecno = 30* 500;
+                              }else{
+                                if(plazo == 45){
+                                  tecno =  45 * 500;
+                                }
+                              }
+                            }
+                        }else{
+                          if(montoSolicitado == 100000){
+                            if(plazo == 15){
+                              tecno =  15 * 1000;
+                            }else{
+                              if(plazo == 30){
+                                tecno = 30* 1000;
+                              }else{
+                                if(plazo == 45){
+                                  tecno =  45 * 1000;
+                                }
+                              }
+                            }
                         }
-                      }
+                        }
+                        }
                     }
                   } 
                 }
-                return tecno;
+                
             }
-
+            return tecno;
+          }
 	getAval(valorsolicitado: number)
 	{
 		var pAval = Math.round(valorsolicitado*0.06);
