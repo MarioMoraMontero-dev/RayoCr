@@ -321,7 +321,8 @@ export class Step2Component implements OnInit {
                   "Siquirres",
                   "Talamanca",
                   "Matina",
-                  "Guácimo"                                     
+                  "Guácimo",
+                  "Limón"                                     
                   );
                 }else{
                   if(this.provincia == 'Puntarenas'){

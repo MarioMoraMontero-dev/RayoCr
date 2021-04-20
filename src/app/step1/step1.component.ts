@@ -178,12 +178,12 @@ export class Step1Component implements OnInit {
           }
 	getAval(valorsolicitado: number)
 	{
-		var pAval = Math.round(valorsolicitado*0.06);
+		var pAval = valorsolicitado*0.06;
 		return pAval;
   }
   getIva(tecnologia: number)
 	{
-		var pIva = Math.round(tecnologia*0.13);
+		var pIva = tecnologia*0.13;
 		return pIva;
   }
   

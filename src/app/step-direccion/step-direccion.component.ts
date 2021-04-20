@@ -150,7 +150,8 @@ export class StepDireccionComponent implements OnInit {
                   "Siquirres",
                   "Talamanca",
                   "Matina",
-                  "Guácimo"                                     
+                  "Guácimo",
+                  "Limón"                                     
                   );
                 }else{
                   if(this.provincia == 'Puntarenas'){
