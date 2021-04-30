@@ -885,7 +885,7 @@ export class Step2Component implements OnInit {
                                                                                                                   "ACAPULCO",
                                                                                                                   "EL ROBLE",
                                                                                                                   "ARANCIBIA",
-                                                                                                                  "PUNTARENASx",
+                                                                                                                  "PUNTARENAS",
                                                                                                                   "PITAHAYA",
                                                                                                                   "CHOMES",
                                                                                                                   "LEPANTO",
