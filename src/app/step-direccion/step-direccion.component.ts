@@ -714,7 +714,7 @@ export class StepDireccionComponent implements OnInit {
                                                                                                                   "ACAPULCO",
                                                                                                                   "EL ROBLE",
                                                                                                                   "ARANCIBIA",
-                                                                                                                  "PUNTARENASx",
+                                                                                                                  "PUNTARENAS",
                                                                                                                   "PITAHAYA",
                                                                                                                   "CHOMES",
                                                                                                                   "LEPANTO",
